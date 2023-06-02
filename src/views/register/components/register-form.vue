@@ -1,24 +1,26 @@
 <template>
-  <div class="login-form-wrapper">
-    <div class="login-form-title">{{ $t('login.form.title') }}</div>
-    <div class="login-form-sub-title">{{ $t('login.form.title') }}</div>
-    <div class="login-form-error-msg">{{ errorMessage }}</div>
+  <div class="register-form-wrapper">
+    <div class="register-form-title">{{ $t('register.form.title') }}</div>
+    <div class="register-form-sub-title">{{ $t('register.form.title') }}</div>
+    <div class="register-form-error-msg">{{ errorMessage }}</div>
     <a-form
-      ref="loginForm"
+      ref="registerForm"
       :model="userInfo"
-      class="login-form"
+      class="register-form"
       layout="vertical"
       @submit="handleSubmit"
     >
       <a-form-item
-        field="account"
-        :rules="[{ required: true, message: $t('login.form.userName.errMsg') }]"
+        field="username"
+        :rules="[
+          { required: true, message: $t('register.form.userName.errMsg') },
+        ]"
         :validate-trigger="['change', 'blur']"
         hide-label
       >
         <a-input
-          v-model="userInfo.account"
-          :placeholder="$t('login.form.userName.placeholder')"
+          v-model="userInfo.username"
+          :placeholder="$t('register.form.userName.placeholder')"
         >
           <template #prefix>
             <icon-user />
@@ -27,13 +29,15 @@
       </a-form-item>
       <a-form-item
         field="password"
-        :rules="[{ required: true, message: $t('login.form.password.errMsg') }]"
+        :rules="[
+          { required: true, message: $t('register.form.password.errMsg') },
+        ]"
         :validate-trigger="['change', 'blur']"
         hide-label
       >
         <a-input-password
           v-model="userInfo.password"
-          :placeholder="$t('login.form.password.placeholder')"
+          :placeholder="$t('register.form.password.placeholder')"
           allow-clear
         >
           <template #prefix>
@@ -42,21 +46,21 @@
         </a-input-password>
       </a-form-item>
       <a-space :size="16" direction="vertical">
-        <div class="login-form-password-actions">
+        <div class="register-form-password-actions">
           <a-checkbox
             checked="rememberPassword"
-            :model-value="loginConfig.rememberPassword"
+            :model-value="registerConfig.rememberPassword"
             @change="setRememberPassword as any"
           >
-            {{ $t('login.form.rememberPassword') }}
+            {{ $t('register.form.rememberPassword') }}
           </a-checkbox>
-          <a-link>{{ $t('login.form.forgetPassword') }}</a-link>
+          <a-link>{{ $t('register.form.forgetPassword') }}</a-link>
         </div>
         <a-button type="primary" html-type="submit" long :loading="loading">
-          {{ $t('login.form.login') }}
+          {{ $t('register.form.register') }}
         </a-button>
-        <a-button type="text" long class="login-form-register-btn">
-          {{ $t('login.form.register') }}
+        <a-button type="text" long class="register-form-register-btn">
+          {{ $t('register.form.register') }}
         </a-button>
       </a-space>
     </a-form>
@@ -72,7 +76,7 @@
   import { useStorage } from '@vueuse/core';
   import { useUserStore } from '@/store';
   import useLoading from '@/hooks/loading';
-  import type { LoginData } from '@/api/user';
+  import type { RegisterData } from '@/api/user';
 
   const router = useRouter();
   const { t } = useI18n();
@@ -80,14 +84,14 @@
   const { loading, setLoading } = useLoading();
   const userStore = useUserStore();
 
-  const loginConfig = useStorage('login-config', {
+  const registerConfig = useStorage('register-config', {
     rememberPassword: true,
-    account: '', // 演示默认值
-    password: '', // demo default value
+    username: 'admin', // 演示默认值
+    password: 'admin', // demo default value
   });
   const userInfo = reactive({
-    account: loginConfig.value.account,
-    password: loginConfig.value.password,
+    username: registerConfig.value.username,
+    password: registerConfig.value.password,
   });
 
   const handleSubmit = async ({
@@ -101,7 +105,7 @@
     if (!errors) {
       setLoading(true);
       try {
-        await userStore.login(values as LoginData);
+        await userStore.register(values as RegisterData);
         const { redirect, ...othersQuery } = router.currentRoute.value.query;
         router.push({
           name: (redirect as string) || 'Workplace',
@@ -109,13 +113,13 @@
             ...othersQuery,
           },
         });
-        Message.success(t('login.form.login.success'));
-        const { rememberPassword } = loginConfig.value;
-        const { account, password } = values;
+        Message.success(t('register.form.register.success'));
+        const { rememberPassword } = registerConfig.value;
+        const { username, password } = values;
         // 实际生产环境需要进行加密存储。
         // The actual production environment requires encrypted storage.
-        loginConfig.value.account = rememberPassword ? account : '';
-        loginConfig.value.password = rememberPassword ? password : '';
+        registerConfig.value.username = rememberPassword ? username : '';
+        registerConfig.value.password = rememberPassword ? password : '';
       } catch (err) {
         errorMessage.value = (err as Error).message;
       } finally {
@@ -124,12 +128,12 @@
     }
   };
   const setRememberPassword = (value: boolean) => {
-    loginConfig.value.rememberPassword = value;
+    registerConfig.value.rememberPassword = value;
   };
 </script>
 
 <style lang="less" scoped>
-  .login-form {
+  .register-form {
     &-wrapper {
       width: 320px;
     }
