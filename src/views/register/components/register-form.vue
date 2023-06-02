@@ -11,17 +11,14 @@
       @submit="handleSubmit"
     >
       <a-form-item
-        field="username"
+        field="phone"
         :rules="[
           { required: true, message: $t('register.form.userName.errMsg') },
         ]"
         :validate-trigger="['change', 'blur']"
         hide-label
       >
-        <a-input
-          v-model="userInfo.username"
-          :placeholder="$t('register.form.userName.placeholder')"
-        >
+        <a-input v-model="userInfo.phone">
           <template #prefix>
             <icon-user />
           </template>
@@ -35,31 +32,28 @@
         :validate-trigger="['change', 'blur']"
         hide-label
       >
-        <a-input-password
-          v-model="userInfo.password"
-          :placeholder="$t('register.form.password.placeholder')"
-          allow-clear
-        >
+        <a-input-password v-model="userInfo.password" allow-clear>
           <template #prefix>
             <icon-lock />
           </template>
         </a-input-password>
       </a-form-item>
+      <a-form-item
+        field="verifyCode"
+        :rules="[
+          { required: false, message: $t('register.form.verifyCode.errMsg') },
+        ]"
+        :validate-trigger="['change', 'blur']"
+        hide-label
+      >
+        <a-input v-model="userInfo.verifyCode" allow-clear>
+          <template #prefix>
+            <icon-code />
+          </template>
+        </a-input>
+      </a-form-item>
       <a-space :size="16" direction="vertical">
-        <div class="register-form-password-actions">
-          <a-checkbox
-            checked="rememberPassword"
-            :model-value="registerConfig.rememberPassword"
-            @change="setRememberPassword as any"
-          >
-            {{ $t('register.form.rememberPassword') }}
-          </a-checkbox>
-          <a-link>{{ $t('register.form.forgetPassword') }}</a-link>
-        </div>
         <a-button type="primary" html-type="submit" long :loading="loading">
-          {{ $t('register.form.register') }}
-        </a-button>
-        <a-button type="text" long class="register-form-register-btn">
           {{ $t('register.form.register') }}
         </a-button>
       </a-space>
@@ -84,14 +78,10 @@
   const { loading, setLoading } = useLoading();
   const userStore = useUserStore();
 
-  const registerConfig = useStorage('register-config', {
-    rememberPassword: true,
-    username: 'admin', // 演示默认值
-    password: 'admin', // demo default value
-  });
   const userInfo = reactive({
-    username: registerConfig.value.username,
-    password: registerConfig.value.password,
+    phone: '',
+    password: '',
+    verifyCode: '',
   });
 
   const handleSubmit = async ({
@@ -105,30 +95,15 @@
     if (!errors) {
       setLoading(true);
       try {
-        await userStore.register(values as RegisterData);
-        const { redirect, ...othersQuery } = router.currentRoute.value.query;
-        router.push({
-          name: (redirect as string) || 'Workplace',
-          query: {
-            ...othersQuery,
-          },
-        });
+        await userStore.registerByPhone(values as RegisterData);
+        router.push({ name: 'login' });
         Message.success(t('register.form.register.success'));
-        const { rememberPassword } = registerConfig.value;
-        const { username, password } = values;
-        // 实际生产环境需要进行加密存储。
-        // The actual production environment requires encrypted storage.
-        registerConfig.value.username = rememberPassword ? username : '';
-        registerConfig.value.password = rememberPassword ? password : '';
       } catch (err) {
         errorMessage.value = (err as Error).message;
       } finally {
         setLoading(false);
       }
     }
-  };
-  const setRememberPassword = (value: boolean) => {
-    registerConfig.value.rememberPassword = value;
   };
 </script>
 

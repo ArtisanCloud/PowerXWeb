@@ -1,12 +1,15 @@
 import { defineStore } from 'pinia';
 import {
   login as userLogin,
+  registerByPhone as userRegisterByPhone,
   logout as userLogout,
   getUserInfo,
   LoginData,
+  RegisterData,
 } from '@/api/user';
 import { setToken, clearToken } from '@/utils/auth';
 import { removeRouteListener } from '@/utils/route-listener';
+import { Message } from '@arco-design/web-vue';
 import { UserState } from './types';
 import useAppStore from '../app';
 
@@ -58,6 +61,11 @@ const useUserStore = defineStore('user', {
       const res = await getUserInfo();
 
       this.setInfo(res.data);
+    },
+
+    // Register
+    async registerByPhone(registerForm: RegisterData) {
+      await userRegisterByPhone(registerForm);
     },
 
     // Login

@@ -25,6 +25,16 @@ export interface Customer extends PowerModel, CustomerExternalId {
 
 export type User = Customer;
 
+export interface RegisterData {
+  phone: string;
+  password: string;
+  verifyCode: string;
+}
+
+export interface RegisterRes {
+  customerId: number;
+}
+
 export interface LoginData {
   account: string;
   password: string;
@@ -45,6 +55,18 @@ export interface LoginRes {
   avatarURL?: string;
   gender?: string;
   token: Token;
+}
+
+export async function registerByPhone(data: RegisterData) {
+  const encodedPassword = await encodePassword(data.password);
+  return axios.post<RegisterRes>(
+    `${PrefixUriWeb + UriWebCustomer}/registerByPhone`,
+    {
+      phone: data.phone,
+      password: encodedPassword,
+      verifyCode: data.verifyCode,
+    }
+  );
 }
 
 export async function login(data: LoginData) {
