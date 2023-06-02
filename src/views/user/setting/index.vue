@@ -15,9 +15,9 @@
           <a-tab-pane key="2" :title="$t('userSetting.tab.securitySettings')">
             <SecuritySettings />
           </a-tab-pane>
-          <a-tab-pane key="3" :title="$t('userSetting.tab.certification')">
-            <Certification />
-          </a-tab-pane>
+          <!--          <a-tab-pane key="3" :title="$t('userSetting.tab.certification')">-->
+          <!--            <Certification />-->
+          <!--          </a-tab-pane>-->
         </a-tabs>
       </a-col>
     </a-row>

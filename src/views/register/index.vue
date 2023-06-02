@@ -4,10 +4,10 @@
       <img alt="logo" src="/src/assets/images/logo.png" />
       <div class="logo-text">PowerX Web</div>
     </div>
-    <!--    <LoginBanner />-->
+    <!--    <RegisterBanner />-->
     <div class="content">
       <div class="content-inner">
-        <LoginForm />
+        <RegisterForm />
       </div>
       <div class="footer">
         <Footer />
@@ -18,7 +18,7 @@
 
 <script lang="ts" setup>
   import Footer from '@/components/footer/index.vue';
-  import LoginForm from './components/login-form.vue';
+  import RegisterForm from './components/register-form.vue';
 </script>
 
 <style lang="less" scoped>

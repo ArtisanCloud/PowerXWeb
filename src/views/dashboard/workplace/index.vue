@@ -1,148 +1,89 @@
 <template>
   <div class="container">
-    <div class="left-side">
-      <div class="panel">
-        <Banner />
-        <DataPanel />
-        <ContentChart />
+    <a-card class="custom-card">
+      <div class="powerx-intro">
+        <h1>PowerX - 一个灵活可扩展的基于CRM的产品项目</h1>
+        <p
+          >PowerX
+          是一个开放式的项目，旨在创建基于CRM的产品套件，可用于各种业务场景。任何业务的核心都是其客户和产品，而
+          PowerX 提供了一个灵活且可扩展的平台来管理这两个关键方面。</p
+        >
+        <h2>PowerX 支持的主要业务模型</h2>
+        <ul>
+          <li>以客户为中心的电商模型（B2C），支持客户裂变和SCRM。</li>
+          <li
+            >基于企业微信的社交CRM（SCRM）功能，以帮助企业管理私密客户互动。</li
+          >
+          <li
+            >全域电商（PowerX-Pro）模型，具有渠道管理功能和多级定价和佣金模型。</li
+          >
+        </ul>
+        <h2>可定制化的模块，用于行业特定的解决方案</h2>
+        <p
+          >PowerX 提供许多常见业务场景的标准模块和功能，但也高度可定制化，允许
+          IT 团队开发行业特定的解决方案。PowerX
+          以标准化和易用性为重点，旨在成为广泛采用的平台。</p
+        >
       </div>
-      <a-grid :cols="24" :col-gap="16" :row-gap="16" style="margin-top: 16px">
-        <a-grid-item
-          :span="{ xs: 24, sm: 24, md: 24, lg: 12, xl: 12, xxl: 12 }"
-        >
-          <PopularContent />
-        </a-grid-item>
-        <a-grid-item
-          :span="{ xs: 24, sm: 24, md: 24, lg: 12, xl: 12, xxl: 12 }"
-        >
-          <CategoriesPercent />
-        </a-grid-item>
-      </a-grid>
-    </div>
-    <div class="right-side">
-      <a-grid :cols="24" :row-gap="16">
-        <a-grid-item :span="24">
-          <div class="panel moduler-wrap">
-            <QuickOperation />
-            <RecentlyVisited />
-          </div>
-        </a-grid-item>
-        <a-grid-item class="panel" :span="24">
-          <Carousel />
-        </a-grid-item>
-        <a-grid-item class="panel" :span="24">
-          <Announcement />
-        </a-grid-item>
-        <a-grid-item class="panel" :span="24">
-          <Docs />
-        </a-grid-item>
-      </a-grid>
-    </div>
+    </a-card>
   </div>
 </template>
 
-<script lang="ts" setup>
-  import Banner from './components/banner.vue';
-  import DataPanel from './components/data-panel.vue';
-  import ContentChart from './components/content-chart.vue';
-  import PopularContent from './components/popular-content.vue';
-  import CategoriesPercent from './components/categories-percent.vue';
-  import RecentlyVisited from './components/recently-visited.vue';
-  import QuickOperation from './components/quick-operation.vue';
-  import Announcement from './components/announcement.vue';
-  import Carousel from './components/carousel.vue';
-  import Docs from './components/docs.vue';
-</script>
+<script lang="ts" setup></script>
 
 <script lang="ts">
   export default {
-    name: 'Dashboard', // If you want the include property of keep-alive to take effect, you must name the component
+    name: 'Home',
   };
 </script>
 
-<style lang="less" scoped>
+<style scoped>
   .container {
-    background-color: var(--color-fill-2);
-    padding: 16px 20px;
-    padding-bottom: 0;
+    height: 100%;
     display: flex;
+    justify-content: center;
+    align-items: start;
   }
 
-  .left-side {
-    flex: 1;
-    overflow: auto;
+  .custom-card {
+    border-radius: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
   }
 
-  .right-side {
-    width: 280px;
-    margin-left: 16px;
+  .powerx-intro {
+    margin: 0 auto;
+    padding: 40px 20px;
+    text-align: justify;
   }
 
-  .panel {
-    background-color: var(--color-bg-2);
-    border-radius: 4px;
-    overflow: auto;
+  h1,
+  h2 {
+    text-align: center;
+    margin: 20px 0;
   }
-  :deep(.panel-border) {
-    margin-bottom: 0;
-    border-bottom: 1px solid rgb(var(--gray-2));
+
+  h1 {
+    font-size: 28px;
+    color: #3c3c3c;
   }
-  .moduler-wrap {
-    border-radius: 4px;
-    background-color: var(--color-bg-2);
-    :deep(.text) {
-      font-size: 12px;
-      text-align: center;
-      color: rgb(var(--gray-8));
-    }
 
-    :deep(.wrapper) {
-      margin-bottom: 8px;
-      text-align: center;
-      cursor: pointer;
-
-      &:last-child {
-        .text {
-          margin-bottom: 0;
-        }
-      }
-      &:hover {
-        .icon {
-          color: rgb(var(--arcoblue-6));
-          background-color: #e8f3ff;
-        }
-        .text {
-          color: rgb(var(--arcoblue-6));
-        }
-      }
-    }
-
-    :deep(.icon) {
-      display: inline-block;
-      width: 32px;
-      height: 32px;
-      margin-bottom: 4px;
-      color: rgb(var(--dark-gray-1));
-      line-height: 32px;
-      font-size: 16px;
-      text-align: center;
-      background-color: rgb(var(--gray-1));
-      border-radius: 4px;
-    }
+  h2 {
+    font-size: 20px;
+    color: #5c5c5c;
   }
-</style>
 
-<style lang="less" scoped>
-  // responsive
-  .mobile {
-    .container {
-      display: block;
-    }
-    .right-side {
-      // display: none;
-      width: 100%;
-      margin-left: 0;
-      margin-top: 16px;
-    }
+  p {
+    font-size: 16px;
+    line-height: 1.6;
+    color: #6c6c6c;
+  }
+
+  ul {
+    list-style: disc;
+    margin-left: 30px;
+    font-size: 16px;
+    line-height: 1.6;
+    color: #444;
   }
 </style>
