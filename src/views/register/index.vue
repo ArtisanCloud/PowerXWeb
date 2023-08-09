@@ -4,7 +4,6 @@
       <img alt="logo" src="/src/assets/images/logo.png" />
       <div class="logo-text">PowerX Web</div>
     </div>
-    <!--    <RegisterBanner />-->
     <div class="content">
       <div class="content-inner">
         <RegisterForm />
