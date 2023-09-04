@@ -58,6 +58,7 @@ export interface LoginRes {
 }
 
 export async function registerByPhone(data: RegisterData) {
+  // console.log(data);
   const encodedPassword = await encodePassword(data.password);
   return axios.post<RegisterRes>(
     `${PrefixUriWeb + UriWebCustomer}/registerByPhone`,
@@ -82,7 +83,7 @@ export function logout() {
 }
 
 export function getUserInfo() {
-  return axios.post<UserState>('/api/user/info');
+  return axios.get<UserState>('/api/v1/web/customer/user-info');
 }
 
 export function getMenuList() {
