@@ -9,7 +9,6 @@ import {
 } from '@/api/user';
 import { setToken, clearToken } from '@/utils/auth';
 import { removeRouteListener } from '@/utils/route-listener';
-import { Message } from '@arco-design/web-vue';
 import { UserState } from './types';
 import useAppStore from '../app';
 
@@ -59,7 +58,6 @@ const useUserStore = defineStore('user', {
     // Get user's information
     async info() {
       const res = await getUserInfo();
-
       this.setInfo(res.data);
     },
 
