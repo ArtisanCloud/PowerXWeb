@@ -7,7 +7,7 @@
           :style="{ margin: 0, fontSize: '18px' }"
           :heading="5"
         >
-          PowerX Web
+          PowerX Web - {{ PowerXVersion }}
         </a-typography-title>
         <icon-menu-fold
           v-if="!topMenu && appStore.device === 'mobile'"
@@ -198,6 +198,7 @@
   import useLocale from '@/hooks/locale';
   import useUser from '@/hooks/user';
   import Menu from '@/components/menu/index.vue';
+  import { PowerXVersion } from '@/api/index';
   import MessageBox from '../message-box/index.vue';
 
   const appStore = useAppStore();
