@@ -1,6 +1,6 @@
 <template>
-  <div class="navbar">
-    <div class="left-side">
+  <div :class="styles.navbar">
+    <div :class="styles['left-side']">
       <a-space>
         <img alt="logo" src="/src/assets/images/logo.png" width="48" />
         <a-typography-title
@@ -16,13 +16,13 @@
         />
       </a-space>
     </div>
-    <div class="center-side">
+    <div :class="styles['center-side']">
       <Menu v-if="topMenu" />
     </div>
-    <ul class="right-side">
+    <ul :class="styles['right-side']">
       <li>
         <a-tooltip :content="$t('settings.search')">
-          <a-button class="nav-btn" type="outline" :shape="'circle'">
+          <a-button :class="styles['nav-btn']" type="outline" :shape="'circle'">
             <template #icon>
               <icon-search />
             </template>
@@ -32,7 +32,7 @@
       <li>
         <a-tooltip :content="$t('settings.language')">
           <a-button
-            class="nav-btn"
+            :class="styles['nav-btn']"
             type="outline"
             :shape="'circle'"
             @click="setDropDownVisible"
@@ -43,7 +43,7 @@
           </a-button>
         </a-tooltip>
         <a-dropdown trigger="click" @select="changeLocale as any">
-          <div ref="triggerBtn" class="trigger-btn"></div>
+          <div ref="triggerBtn" :class="styles['trigger-btn']"></div>
           <template #content>
             <a-doption
               v-for="item in locales"
@@ -67,7 +67,7 @@
           "
         >
           <a-button
-            class="nav-btn"
+            :class="styles['nav-btn']"
             type="outline"
             :shape="'circle'"
             @click="handleToggleTheme"
@@ -81,10 +81,10 @@
       </li>
       <li>
         <a-tooltip :content="$t('settings.navbar.alerts')">
-          <div class="message-box-trigger">
+          <div :class="styles['message-box-trigger']">
             <a-badge :count="9" dot>
               <a-button
-                class="nav-btn"
+                :class="styles['nav-btn']"
                 type="outline"
                 :shape="'circle'"
                 @click="setPopoverVisible"
@@ -98,9 +98,9 @@
           trigger="click"
           :arrow-style="{ display: 'none' }"
           :content-style="{ padding: 0, minWidth: '400px' }"
-          content-class="message-popover"
+          content-:class="styles.message-popover"
         >
-          <div ref="refBtn" class="ref-btn"></div>
+          <div ref="refBtn" :class="['styles.ref-btn']"></div>
           <template #content>
             <message-box />
           </template>
@@ -115,7 +115,7 @@
           "
         >
           <a-button
-            class="nav-btn"
+            :class="['styles.nav-btn']"
             type="outline"
             :shape="'circle'"
             @click="toggleFullScreen"
@@ -130,7 +130,7 @@
       <li>
         <a-tooltip :content="$t('settings.title')">
           <a-button
-            class="nav-btn"
+            :class="styles['nav-btn']"
             type="outline"
             :shape="'circle'"
             @click="setVisible"
@@ -200,6 +200,7 @@
   import Menu from '@/components/menu/index.vue';
   import { PowerXVersion } from '@/api/index';
   import MessageBox from '../message-box/index.vue';
+  import styles from './index.module.less';
 
   const appStore = useAppStore();
   const userStore = useUserStore();
@@ -259,63 +260,3 @@
   };
   const toggleDrawerMenu = inject('toggleDrawerMenu') as () => void;
 </script>
-
-<style scoped lang="less">
-  .navbar {
-    display: flex;
-    justify-content: space-between;
-    height: 100%;
-    background-color: var(--color-bg-2);
-    border-bottom: 1px solid var(--color-border);
-  }
-
-  .left-side {
-    display: flex;
-    align-items: center;
-    padding-left: 20px;
-  }
-
-  .center-side {
-    flex: 1;
-  }
-
-  .right-side {
-    display: flex;
-    padding-right: 20px;
-    list-style: none;
-    :deep(.locale-select) {
-      border-radius: 20px;
-    }
-    li {
-      display: flex;
-      align-items: center;
-      padding: 0 10px;
-    }
-
-    a {
-      color: var(--color-text-1);
-      text-decoration: none;
-    }
-    .nav-btn {
-      border-color: rgb(var(--gray-2));
-      color: rgb(var(--gray-8));
-      font-size: 16px;
-    }
-    .trigger-btn,
-    .ref-btn {
-      position: absolute;
-      bottom: 14px;
-    }
-    .trigger-btn {
-      margin-left: 14px;
-    }
-  }
-</style>
-
-<style lang="less">
-  .message-popover {
-    .arco-popover-content {
-      margin-top: 0;
-    }
-  }
-</style>
