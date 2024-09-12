@@ -70,6 +70,7 @@ const useUserStore = defineStore('user', {
     async login(loginForm: LoginData) {
       try {
         const res = await userLogin(loginForm);
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
         setToken(res.data.token.accessToken!);
       } catch (err) {
         clearToken();

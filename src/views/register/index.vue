@@ -1,14 +1,14 @@
 <template>
-  <div class="container">
-    <div class="logo">
+  <div :class="styles.container">
+    <div :class="styles.logo">
       <img alt="logo" src="/src/assets/images/logo.png" />
-      <div class="logo-text">PowerX Web</div>
+      <div :class="styles['logo-text']">PowerX Web</div>
     </div>
-    <div class="content">
-      <div class="content-inner">
+    <div :class="styles.content">
+      <div :class="styles['content-inner']">
         <RegisterForm />
       </div>
-      <div class="footer">
+      <div :class="styles.footer">
         <Footer />
       </div>
     </div>
@@ -18,59 +18,5 @@
 <script lang="ts" setup>
   import Footer from '@/components/footer/index.vue';
   import RegisterForm from './components/register-form.vue';
+  import styles from './index.module.less';
 </script>
-
-<style lang="less" scoped>
-  .container {
-    display: flex;
-    height: 100vh;
-
-    .banner {
-      width: 550px;
-      background: linear-gradient(163.85deg, #1d2129 0%, #00308f 100%);
-    }
-
-    .content {
-      position: relative;
-      display: flex;
-      flex: 1;
-      align-items: center;
-      justify-content: center;
-      padding-bottom: 40px;
-    }
-
-    .footer {
-      position: absolute;
-      right: 0;
-      bottom: 0;
-      width: 100%;
-    }
-  }
-
-  .logo {
-    position: fixed;
-    top: 24px;
-    left: 22px;
-    z-index: 1;
-    display: inline-flex;
-    align-items: center;
-
-    &-text {
-      margin-right: 4px;
-      margin-left: 4px;
-      color: var(--color-fill-1);
-      font-size: 20px;
-    }
-  }
-</style>
-
-<style lang="less" scoped>
-  // responsive
-  @media (max-width: @screen-lg) {
-    .container {
-      .banner {
-        width: 25%;
-      }
-    }
-  }
-</style>

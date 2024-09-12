@@ -1,15 +1,15 @@
 <template>
-  <div class="container">
+  <div :class="styles.container">
     <Breadcrumb :items="['menu.result', 'menu.result.success']" />
-    <div class="wrapper">
+    <div :class="styles.wrapper">
       <a-result
-        class="result"
+        :class="styles.result"
         status="success"
         :title="$t('success.result.title')"
         :subtitle="$t('success.result.subTitle')"
       >
         <template #extra>
-          <a-space class="operation-wrap" :size="16">
+          <a-space :class="styles['operation-wrap']" :size="16">
             <a-button key="again" type="secondary">
               {{ $t('success.result.printResult') }}
             </a-button>
@@ -20,7 +20,7 @@
         </template>
       </a-result>
 
-      <div class="steps-wrapper">
+      <div :class="styles['steps-wrapper']">
         <a-typography-paragraph bold>{{
           $t('success.result.progress')
         }}</a-typography-paragraph>
@@ -51,49 +51,12 @@
   </div>
 </template>
 
-<script lang="ts" setup></script>
+<script lang="ts" setup>
+  import styles from './index.module.less';
+</script>
 
 <script lang="ts">
   export default {
     name: 'Success',
   };
 </script>
-
-<style scoped lang="less">
-  .container {
-    padding: 0 20px 20px 20px;
-  }
-  .wrapper {
-    padding: 24px 150px;
-    background-color: var(--color-bg-2);
-    border-radius: 4px;
-  }
-
-  .result {
-    margin: 150px 0 0 0;
-  }
-
-  .operation-wrap {
-    margin-bottom: 40px;
-    text-align: center;
-  }
-
-  .steps-wrapper {
-    width: 100%;
-    min-width: fit-content;
-    margin-bottom: 150px;
-    padding: 20px;
-    background-color: rgb(var(--gray-1));
-  }
-</style>
-
-<style lang="less" scoped>
-  .mobile {
-    .wrapper {
-      padding: 24px 10px;
-      .steps-wrapper {
-        transform: scale(0.8);
-      }
-    }
-  }
-</style>

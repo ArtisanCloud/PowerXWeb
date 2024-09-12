@@ -51,3 +51,9 @@ export function isExist(obj: any): boolean {
 export function isWindow(el: any): el is Window {
   return el === window;
 }
+
+export function isPhoneNumber(phoneNumber: string): boolean {
+  // 使用正则表达式匹配11位数字
+  const regex = /^\d{11}$/;
+  return regex.test(phoneNumber);
+}
