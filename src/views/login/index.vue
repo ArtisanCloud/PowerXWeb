@@ -2,7 +2,7 @@
   <div :class="styles.container">
     <div :class="styles.logo">
       <img alt="logo" src="/src/assets/images/logo.png" />
-      <div :class="styles['logo-text']">PowerPrompt Web</div>
+      <div :class="styles['logo-text']">PowerX Web</div>
     </div>
     <!--    <LoginBanner />-->
     <div :class="styles.content">
