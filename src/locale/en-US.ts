@@ -14,6 +14,9 @@ import localeGroupForm from '@/views/form/group/locale/en-US';
 
 import localeBasicProfile from '@/views/profile/basic/locale/en-US';
 
+import localeMembership from '@/views/membership/locale/en-US';
+import localeOrder from '@/views/order/locale/en-US';
+
 import localeDataAnalysis from '@/views/visualization/data-analysis/locale/en-US';
 import localeMultiDAnalysis from '@/views/visualization/multi-dimension-data-analysis/locale/en-US';
 
@@ -57,6 +60,8 @@ export default {
   ...localeStepForm,
   ...localeGroupForm,
   ...localeBasicProfile,
+  ...localeMembership,
+  ...localeOrder,
   ...localeDataAnalysis,
   ...localeMultiDAnalysis,
   ...localeSuccess,
