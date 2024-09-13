@@ -36,6 +36,7 @@ export interface RegisterRes {
 }
 
 export interface LoginData {
+  rememberPassword?: boolean;
   account: string;
   password: string;
 }

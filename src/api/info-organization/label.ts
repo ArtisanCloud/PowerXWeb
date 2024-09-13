@@ -1,4 +1,4 @@
-import {imageAbleInfo, PowerModel, PrefixUriWeb} from '@/api';
+import { imageAbleInfo, PowerModel, PrefixUriWeb } from '@/api';
 import axios from 'axios';
 import { MediaSet } from '@/api/media-resource';
 import UriInfoOrganization from '@/api/info-organization';

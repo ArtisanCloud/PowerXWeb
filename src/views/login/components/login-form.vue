@@ -1,12 +1,14 @@
 <template>
-  <div class="login-form-wrapper">
-    <div class="login-form-title">{{ $t('login.form.title') }}</div>
-    <div class="login-form-sub-title">{{ $t('login.form.title') }}</div>
-    <div class="login-form-error-msg">{{ errorMessage }}</div>
+  <div :class="styles['login-form-wrapper']">
+    <div :class="styles['login-form-title']">{{ $t('login.form.title') }}</div>
+    <div :class="styles['login-form-sub-title']"
+      >{{ $t('login.form.subTitle') }}
+    </div>
+    <div :class="styles['login-form-error-msg']">{{ errorMessage }}</div>
     <a-form
       ref="loginForm"
       :model="userInfo"
-      class="login-form"
+      :class="styles['login-form']"
       layout="vertical"
       @submit="handleSubmit"
     >
@@ -42,10 +44,10 @@
         </a-input-password>
       </a-form-item>
       <a-space :size="16" direction="vertical">
-        <div class="login-form-password-actions">
+        <div :class="styles['login-form-password-actions']">
           <a-checkbox
             checked="rememberPassword"
-            :model-value="loginConfig.rememberPassword"
+            :model-value="loginConfig.rememberPassword!"
             @change="setRememberPassword as any"
           >
             {{ $t('login.form.rememberPassword') }}
@@ -58,7 +60,7 @@
         <a-button
           type="text"
           long
-          class="login-form-register-btn"
+          :class="styles['login-form-register-btn']"
           href="register"
         >
           {{ $t('login.form.register') }}
@@ -78,6 +80,7 @@
   import { useUserStore } from '@/store';
   import useLoading from '@/hooks/loading';
   import type { LoginData } from '@/api/user';
+  import styles from './login-form.module.less';
 
   const router = useRouter();
   const { t } = useI18n();
@@ -85,7 +88,7 @@
   const { loading, setLoading } = useLoading();
   const userStore = useUserStore();
 
-  const loginConfig = useStorage('login-config', {
+  const loginConfig = useStorage<LoginData>('login-config', {
     rememberPassword: true,
     account: '', // 演示默认值
     password: '', // demo default value
@@ -132,39 +135,3 @@
     loginConfig.value.rememberPassword = value;
   };
 </script>
-
-<style lang="less" scoped>
-  .login-form {
-    &-wrapper {
-      width: 320px;
-    }
-
-    &-title {
-      color: var(--color-text-1);
-      font-weight: 500;
-      font-size: 24px;
-      line-height: 32px;
-    }
-
-    &-sub-title {
-      color: var(--color-text-3);
-      font-size: 16px;
-      line-height: 24px;
-    }
-
-    &-error-msg {
-      height: 32px;
-      color: rgb(var(--red-6));
-      line-height: 32px;
-    }
-
-    &-password-actions {
-      display: flex;
-      justify-content: space-between;
-    }
-
-    &-register-btn {
-      color: var(--color-text-3) !important;
-    }
-  }
-</style>

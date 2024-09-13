@@ -14,7 +14,7 @@
     },
     "lib": ["es2020", "dom"],
     "skipLibCheck": true,
-    "types": [ "node" ]
+    "types": ["node"]
   },
   "include": ["src/**/*", "src/**/*.vue"],
   "exclude": ["node_modules"]

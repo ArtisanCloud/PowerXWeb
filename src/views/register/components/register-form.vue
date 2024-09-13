@@ -39,19 +39,33 @@
         </a-input-password>
       </a-form-item>
       <a-form-item
-        field="verifyCode"
+        field="inviteCode"
         :rules="[
-          { required: false, message: $t('register.form.verifyCode.errMsg') },
+          { required: false, message: $t('register.form.inviteCode.errMsg') },
         ]"
         :validate-trigger="['change', 'blur']"
         hide-label
       >
-        <a-input v-model="userInfo.verifyCode" allow-clear>
+        <a-input v-model="userInfo.inviteCode" allow-clear>
           <template #prefix>
             <icon-code />
           </template>
         </a-input>
       </a-form-item>
+      <!--      <a-form-item-->
+      <!--        field="verifyCode"-->
+      <!--        :rules="[-->
+      <!--          { required: false, message: $t('register.form.verifyCode.errMsg') },-->
+      <!--        ]"-->
+      <!--        :validate-trigger="['change', 'blur']"-->
+      <!--        hide-label-->
+      <!--      >-->
+      <!--        <a-input v-model="userInfo.verifyCode" allow-clear>-->
+      <!--          <template #prefix>-->
+      <!--            <icon-code />-->
+      <!--          </template>-->
+      <!--        </a-input>-->
+      <!--      </a-form-item>-->
       <a-space :size="16" direction="vertical">
         <a-button type="primary" html-type="submit" long :loading="loading">
           {{ $t('register.form.register') }}
@@ -82,6 +96,7 @@
     phone: '',
     password: '',
     verifyCode: '',
+    inviteCode: '',
   });
 
   const handleSubmit = async ({

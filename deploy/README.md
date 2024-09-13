@@ -1,5 +1,4 @@
-# 本地打包PowerXDashboard的Docker镜像
-
+# 本地打包 PowerXDashboard 的 Docker 镜像
 
 ```shell
 # 按照你的环境和需求，可替换{xxx}里的值
@@ -14,4 +13,3 @@
 > docker run -p {3000}:{80} -it {powerx-dashboard}:{latest}
 
 ```
-
