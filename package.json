@@ -29,7 +29,7 @@
     ]
   },
   "dependencies": {
-    "@arco-design/web-vue": "^2.44.7",
+    "@arco-design/web-vue": "^2.56.0",
     "@types/node": "^20.5.9",
     "@vueuse/core": "^9.3.0",
     "arco-design-pro-vue": "^2.7.2",
