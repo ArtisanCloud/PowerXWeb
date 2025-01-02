@@ -17,9 +17,6 @@ import localeBasicProfile from '@/views/profile/basic/locale/zh-CN';
 import localeOrder from '@/views/order/locale/zh-CN';
 import localeMembership from '@/views/membership/locale/zh-CN';
 
-import localeDataAnalysis from '@/views/visualization/data-analysis/locale/zh-CN';
-import localeMultiDAnalysis from '@/views/visualization/multi-dimension-data-analysis/locale/zh-CN';
-
 import localeSuccess from '@/views/result/success/locale/zh-CN';
 import localeError from '@/views/result/error/locale/zh-CN';
 
@@ -62,8 +59,6 @@ export default {
   ...localeBasicProfile,
   ...localeMembership,
   ...localeOrder,
-  ...localeDataAnalysis,
-  ...localeMultiDAnalysis,
   ...localeSuccess,
   ...localeError,
   ...locale403,
