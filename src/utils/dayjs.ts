@@ -1,0 +1,83 @@
+import dayjs from 'dayjs';
+import utc from 'dayjs/plugin/utc';
+import timezone from 'dayjs/plugin/timezone';
+
+export const DateFormat = 'YYYY-MM-DD HH:mm:ss';
+export const DateFormatTZ = 'YYYY-MM-DD HH:mm:ss ZZ';
+export const DateFormatZ = 'YYYY-MM-DD HH:mm:ss (z)';
+export const TimeZone = 'Asia/Shanghai';
+
+export function formatDateToYMD(date: Date): string {
+  const year = date.getFullYear();
+  const month = (date.getMonth() + 1).toString().padStart(2, '0'); // 补零
+  const day = date.getDate().toString().padStart(2, '0'); // 补零
+
+  // 使用模板字符串拼接格式化后的日期
+  const formattedDate = `${year}-${month}-${day}`;
+  return formattedDate;
+}
+
+export function convertCSTDateToUTCDate(cstDateString: string): string {
+  // CST格式的日期字符串  "2023-04-23 10:00:00 +0800 CST";
+
+  // 将CST日期字符串转换为dayjs对象
+  const date = dayjs(cstDateString, DateFormat);
+
+  // 将时区转换为本地时间
+  const localDate = date.tz();
+
+  // 格式化日期字符串
+  const formattedDate = localDate.format();
+
+  return formattedDate;
+}
+
+export function initDayJs() {
+  // 添加dayjs插件
+  dayjs.extend(utc);
+  dayjs.extend(timezone);
+
+  // 设置本地时区
+  dayjs.tz.setDefault(TimeZone);
+}
+
+export function formatDisplayDate(createdAt: Date | string | null) {
+  let datetime = dayjs();
+
+  if (createdAt instanceof Date) {
+    datetime = dayjs(createdAt);
+  } else if (typeof createdAt === 'string') {
+    const trimmedDate = createdAt.substring(0, 19);
+    // console.log(trimmedDate);
+    datetime = dayjs(trimmedDate);
+  }
+
+  const formatDate = datetime.format(DateFormat);
+  // console.log(createdAt, formatDate);
+  return formatDate;
+}
+
+export function formatLoadingText(createdAt: Date | string | null) {
+  const formatDate = formatDisplayDate(createdAt);
+
+  ('正在排队中，当前第N位，请稍等');
+
+  return formatDate;
+}
+
+export function formatStoreTime(storeWorkTime: string) {
+  // console.log(storeWorkTime);
+  const match = storeWorkTime.match(
+    /(\d{4})-(\d{2})-(\d{2}) (\d{2}):(\d{2}):(\d{2})/
+  );
+  if (match) {
+    const hour = match[4];
+    const minute = match[5];
+    const second = match[6];
+    const formatWorkTime = `${hour}:${minute}:${second}`;
+    // console.log(formatWorkTime);
+    return formatWorkTime;
+  }
+  return '';
+  // return dayjs(reservedTime).format('MM-DD HH:mm');
+}
