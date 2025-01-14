@@ -1,8 +1,7 @@
-import { PowerModel } from '@/api/common';
 import axios from 'axios';
 import UriTrade from '@/api/crm/trade/index';
 import { Pagination } from '@/types/global';
-import { PrefixUriAdmin } from '@/api';
+import { PrefixUriWeb, PowerModel } from '@/api';
 
 const UriTokenProduct = '/token/products';
 
@@ -28,24 +27,24 @@ export interface ListTokenProductPageReply extends Pagination {
 
 export function listTokenProducts(request: ListTokenProductPageRequest) {
   return axios.get<ListTokenProductPageReply>(
-    `${PrefixUriAdmin + UriTrade + UriTokenProduct}/page-list`,
+    `${PrefixUriWeb + UriTrade + UriTokenProduct}/page-list`,
     {
       params: request,
-    },
+    }
   );
 }
 
 export function createTokenProduct(request: TokenProduct) {
   return axios.post<TokenProduct>(
-    `${PrefixUriAdmin + UriTrade + UriTokenProduct}`,
-    request,
+    `${PrefixUriWeb + UriTrade + UriTokenProduct}`,
+    request
   );
 }
 
 export function updateTokenProduct(request: TokenProduct) {
   return axios.put<TokenProduct>(
-    `${PrefixUriAdmin + UriTrade + UriTokenProduct}/${request.id}`,
-    request,
+    `${PrefixUriWeb + UriTrade + UriTokenProduct}/${request.id}`,
+    request
   );
 }
 
@@ -59,6 +58,6 @@ export interface DeleteTokenProductReply {
 
 export function deleteTokenProduct(request: DeleteTokenProductRequest) {
   return axios.delete<DeleteTokenProductReply>(
-    `${PrefixUriAdmin + UriTrade + UriTokenProduct}/${request.id}`,
+    `${PrefixUriWeb + UriTrade + UriTokenProduct}/${request.id}`
   );
 }

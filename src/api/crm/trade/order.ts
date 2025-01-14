@@ -1,11 +1,9 @@
-import { PowerModel } from '@/api/common';
 import axios from 'axios';
 import { Payment } from '@/api/crm/trade/payment';
-import { Customer } from '@/api/crm/customer-domain/customer';
 import UriTrade from '@/api/crm/trade/index';
 import { Pagination } from '@/types/global';
 import { RequestOption, UploadRequest } from '@arco-design/web-vue';
-import { PrefixUriAdmin } from '@/api';
+import { PrefixUriWeb, PowerModel } from '@/api';
 import { Logistics } from '@/api/crm/trade/logistics';
 import { MediaSet } from '@/api/media-resource';
 
@@ -41,8 +39,6 @@ export interface Order extends PowerModel {
   orderItems?: OrderItem[];
   payments?: Payment[];
   logistics: Logistics;
-
-  customer?: Customer;
 }
 
 export interface ListOrderPageRequest extends Pagination {
@@ -62,10 +58,10 @@ export interface ListOrderPageReply extends Pagination {
 
 export function listOrders(request: ListOrderPageRequest) {
   return axios.get<ListOrderPageReply>(
-    `${PrefixUriAdmin + UriTrade + UriOrder}/page-list`,
+    `${PrefixUriWeb + UriTrade + UriOrder}/page-list`,
     {
       params: request,
-    },
+    }
   );
 }
 
@@ -76,21 +72,21 @@ interface ExportOrdersReply {
 
 export function ExportOrders(request: ListOrderPageRequest) {
   return axios.get<ExportOrdersReply>(
-    `${PrefixUriAdmin + UriTrade + UriOrder}/export`,
+    `${PrefixUriWeb + UriTrade + UriOrder}/export`,
     {
       params: request,
-    },
+    }
   );
 }
 
 export function createOrder(request: Order) {
-  return axios.post<Order>(`${PrefixUriAdmin + UriTrade + UriOrder}`, request);
+  return axios.post<Order>(`${PrefixUriWeb + UriTrade + UriOrder}`, request);
 }
 
 export function updateOrder(request: Order) {
   return axios.put<Order>(
-    `${PrefixUriAdmin + UriTrade + UriOrder}/${request.id}`,
-    request,
+    `${PrefixUriWeb + UriTrade + UriOrder}/${request.id}`,
+    request
   );
 }
 
@@ -104,7 +100,7 @@ export interface DeleteOrderReply {
 
 export function deleteOrder(request: DeleteOrderRequest) {
   return axios.delete<DeleteOrderReply>(
-    `${PrefixUriAdmin + UriTrade + UriOrder}/${request.id}`,
+    `${PrefixUriWeb + UriTrade + UriOrder}/${request.id}`
   );
 }
 
@@ -125,14 +121,14 @@ export function UploadOrders(option: any) {
 
   // 发送自定义请求
   return axios.post<UploadOrdersReply>(
-    `${PrefixUriAdmin + UriTrade}/orders/import`,
-    formData,
+    `${PrefixUriWeb + UriTrade}/orders/import`,
+    formData
   );
 }
 
 export function uploadOrdersWithTrackingNumbers(
   option: RequestOption,
-  onSuccess: (data: any) => void,
+  onSuccess: (data: any) => void
 ): UploadRequest {
   let isAborted = false; // 标记是否中止上传
 

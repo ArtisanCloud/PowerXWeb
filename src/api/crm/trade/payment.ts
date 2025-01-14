@@ -1,8 +1,7 @@
-import { PowerModel } from '@/api/common';
 import axios from 'axios';
 import UriTrade from '@/api/crm/trade/index';
 import { Pagination } from '@/types/global';
-import { PrefixUriAdmin } from '@/api';
+import { PrefixUriWeb, PowerModel } from '@/api';
 
 const UriPayment = '/payments';
 
@@ -46,24 +45,24 @@ export interface ListPaymentPageReply extends Pagination {
 
 export function listPayments(request: ListPaymentPageRequest) {
   return axios.get<ListPaymentPageReply>(
-    `${PrefixUriAdmin + UriTrade + UriPayment}/page-list`,
+    `${PrefixUriWeb + UriTrade + UriPayment}/page-list`,
     {
       params: request,
-    },
+    }
   );
 }
 
 export function createPayment(request: Payment) {
   return axios.post<Payment>(
-    `${PrefixUriAdmin + UriTrade + UriPayment}`,
-    request,
+    `${PrefixUriWeb + UriTrade + UriPayment}`,
+    request
   );
 }
 
 export function updatePayment(request: Payment) {
   return axios.put<Payment>(
-    `${PrefixUriAdmin + UriTrade + UriPayment}/${request.id}`,
-    request,
+    `${PrefixUriWeb + UriTrade + UriPayment}/${request.id}`,
+    request
   );
 }
 
@@ -77,6 +76,6 @@ export interface DeletePaymentReply {
 
 export function deletePayment(request: DeletePaymentRequest) {
   return axios.delete<DeletePaymentReply>(
-    `${PrefixUriAdmin + UriTrade + UriPayment}/${request.id}`,
+    `${PrefixUriWeb + UriTrade + UriPayment}/${request.id}`
   );
 }
