@@ -35,6 +35,9 @@ export default defineConfig({
   },
   define: {
     'process.env': {},
+    '__VUE_OPTIONS_API__': true, // 启用 Options API
+    '__VUE_PROD_HYDRATION_MISMATCH_DETAILS__': false, // 关闭此特性
+    '__VUE_PROD_DEVTOOLS__': false, // 关闭生产环境调试工具
   },
   css: {
     preprocessorOptions: {

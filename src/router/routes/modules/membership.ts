@@ -14,7 +14,7 @@ const PROFILE: AppRouteRecordRaw = {
   children: [
     {
       path: 'list',
-      name: 'List',
+      name: 'MembershipList',
       component: () => import('@/views/membership/list/index.vue'),
       meta: {
         hideInMenu: false,
