@@ -1,0 +1,85 @@
+.container{
+  flex: 1;
+  border-bottom: 1px solid #ddd;
+  padding: 5px;
+
+  width:100%;
+  height:100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  //border:1px solid blue;
+  gap:8px;
+
+
+
+  .info{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    //border: #ff006a 1px solid;
+    margin-left: 8px;
+    .avatar{
+      .avatarImage {
+        width: 24px;
+      }
+    }
+    .content{
+      margin-left: 10px;
+      display: flex;
+      flex-direction: column;
+      //border: #ff006a 1px solid;
+      .titleBox{
+        display: flex;
+        flex-direction: row;
+        margin-bottom: 6px;
+        .title{
+          flex:1;
+          //border: #ff006a 1px solid;
+          display: flex;
+          align-items: center;
+          //margin-left: 10px;
+          font-size: 14px;
+          color: @chat-bot-text;
+          font-weight: bold;
+        }
+        .llmSelectorBox{
+          flex:2;
+          border: #ded0d0 1px solid;
+          margin-left: 10px;
+          width: 160px;
+          height: 30px;
+          border-radius: 5px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          cursor: pointer;
+          /* 鼠标悬浮时的背景颜色 */
+          &:hover {
+            background-color: #eee7e7;  /* 你可以修改为你喜欢的颜色 */
+          }
+        }
+      }
+
+    }
+    .description{
+      font-size: 10px;
+      color: @chat-bot-text-soft;
+    }
+  }
+  .action{
+    margin-right: 4px;
+    //border:1px solid blue;
+
+    .showSetting {
+      margin-right: 10px;
+      border: none;
+    }
+
+    .openSetting {
+      margin-right: 10px;
+      border: none;
+    }
+  }
+}

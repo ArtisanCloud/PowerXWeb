@@ -42,6 +42,7 @@ export default defineConfig({
   css: {
     preprocessorOptions: {
       less: {
+        additionalData: `@import "src/assets/style/variable.less";`, // 修改为你的变量文件路径
         modifyVars: {
           hack: `true; @import (reference) "${resolve(
             'src/assets/style/breakpoint.less'

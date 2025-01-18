@@ -6,6 +6,8 @@
  */
 export const PrefixUriWeb = '/api/v1/web';
 
+export const PrefixSSEUriWeb = '/sse/v1/web';
+
 export const PowerXVersion = import.meta.env.VITE_POWERX_VERSION ?? 'v1.0.0';
 
 export const DefaultPageSize = 10;
@@ -16,6 +18,7 @@ const ResourceHost = import.meta.env.VITE_RESOURCE_URL;
 
 export interface PowerModel {
   id?: number;
+  uuid?: string;
   createdAt?: Date;
   updatedAt?: Date;
   deletedAt?: Date;

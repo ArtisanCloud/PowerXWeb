@@ -1,4 +1,6 @@
-const TOKEN_KEY = 'token';
+export const TOKEN_KEY = 'token';
+export const OPENAPI_TOKEN_KEY = 'openapi_token';
+export const ACCOUNT_KEY = 'account';
 
 const isLogin = () => {
   return !!localStorage.getItem(TOKEN_KEY);
