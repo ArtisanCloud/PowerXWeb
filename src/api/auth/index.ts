@@ -1,5 +1,4 @@
-import { backendClient } from '@/api/backend';
-import { User } from '@/api/tenant/user';
+import { User } from '@/api/user';
 
 export interface Response {
   error: string;
@@ -26,15 +25,6 @@ export interface ResponseLogin extends Response {
   token: Token;
 }
 
-export async function ActionLogin(option: RequestLogin) {
-  // 处理上传事件的逻辑
-  const endpoint = `/api/auth/login`;
-
-  const res = await backendClient.backend_post(endpoint, option);
-
-  return res as ResponseLogin;
-}
-
 export interface RequestRegister {
   account: string;
   password: string;
@@ -42,12 +32,4 @@ export interface RequestRegister {
 
 export interface ResponseRegister extends Response {
   user: User;
-}
-export async function ActionRegister(option: RequestRegister) {
-  // 处理上传事件的逻辑
-  const endpoint = `/api/auth/register`;
-
-  const res = await backendClient.backend_post(endpoint, option);
-
-  return res as ResponseRegister;
 }

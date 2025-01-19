@@ -3,7 +3,7 @@ import {
   ChatCompletionReply,
   ChatCompletionRequest,
 } from '@/api/chat-bot/chat-completion';
-import { ChatResponse, getChatBotActionUrl, Usage } from '@/api/chat-bot/base';
+import { ChatResponse, GetChatBotActionUrl, Usage } from '@/api/chat-bot/index';
 
 export interface Completion {
   model?: string;
@@ -49,11 +49,11 @@ export interface CompletionReply extends ChatResponse {
 }
 
 export function Completion(request: CompletionRequest) {
-  const url = getChatBotActionUrl('completion');
+  const url = GetChatBotActionUrl('', 'completion');
   return axios.post<CompletionReply>(url, request);
 }
 
 export function CompletionStream(request: ChatCompletionRequest) {
-  const url = getChatBotActionUrl('completion/stream');
+  const url = GetChatBotActionUrl('', 'completion/stream');
   return axios.post<ChatCompletionReply>(url, request);
 }

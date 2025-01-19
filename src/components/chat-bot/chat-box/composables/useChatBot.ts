@@ -10,6 +10,7 @@ import { v4 as uuidv4 } from 'uuid';
 import { FormatSSEMessageReply, SSEMessage } from '@/utils/sse/format';
 import useChatBotStore from '@/store/modules/chat-bot';
 import useSSE from '@/utils/sse/EventSourceHelper';
+import { BAIDU_ERNIE_LITE_8K } from '@/config/llm';
 
 export default function useChatBot() {
   const chatBotStore = useChatBotStore();
@@ -140,7 +141,7 @@ export default function useChatBot() {
     const requestBody: RequestSendChat = {
       conversationUUID: sessionID,
       appUUID: chatBotStore.selectedApp?.uuid ?? '',
-      llm: chatBotStore.selectedLlm ?? '',
+      llm: chatBotStore.selectedLlm ?? BAIDU_ERNIE_LITE_8K,
       images: chatBotStore.selectedImage ? [chatBotStore.selectedImage] : [], // 如果有图片则添加到请求中
       messages: [
         {

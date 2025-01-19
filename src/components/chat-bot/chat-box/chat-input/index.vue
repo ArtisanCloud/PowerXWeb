@@ -4,8 +4,8 @@
   import useChatBotStore from '@/store/modules/chat-bot';
   import styles from './index.module.less';
 
-  const refInput = ref<HTMLTextAreaElement>(null);
-  const refFileInput = ref<HTMLInputElement>(null);
+  const refInput = ref<HTMLTextAreaElement>();
+  const refFileInput = ref<HTMLInputElement>();
   const chatBotStore = useChatBotStore();
   const chatBot = useChatBot();
 

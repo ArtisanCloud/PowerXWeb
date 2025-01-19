@@ -32,6 +32,7 @@ const useChatBotStore = defineStore('chatBot', {
     selectedImage: '',
     controller: null,
     selectedApp: {
+      // uuid: '7c189a18-ef3f-41fd-bda1-1607772020bd',
       name: 'BrainX',
       description: '很乐意为您服务\n',
     },

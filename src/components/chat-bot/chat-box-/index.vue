@@ -308,7 +308,11 @@
       <!-- 图片预览 -->
       <div v-if="selectedImage" :class="styles.imagePreview">
         <div :class="styles.previewContent">
-          <a-avatar :image-url="selectedImage" size="60" shape="square" />
+          <a-avatar
+            :image-url="selectedImage"
+            :size="Number('60')"
+            shape="square"
+          />
           <a-button
             type="text"
             size="small"

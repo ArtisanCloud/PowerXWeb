@@ -1,10 +1,10 @@
 import axios from 'axios';
 import {
   ChatResponse,
-  getChatBotActionUrl,
-  getChatBotSSEActionUrl,
   Usage,
-} from '@/api/chat-bot/base';
+  GetChatBotActionUrl,
+  GetChatBotSSEActionUrl,
+} from '@/api/chat-bot/index';
 
 // Chat Completion
 export interface ChatCompletionMessage {
@@ -46,11 +46,11 @@ export interface ChatCompletionReply extends ChatResponse {
 export type ChatCompletionRequest = ChatCompletion;
 
 export function ChatCompletion(request: ChatCompletionRequest) {
-  const url = getChatBotActionUrl('chat/completion');
+  const url = GetChatBotActionUrl('', 'chat/completion');
   return axios.post<ChatCompletionReply>(url, request);
 }
 
 export function ChatCompletionStream(request: ChatCompletionRequest) {
-  const url = getChatBotSSEActionUrl('chat/completion/stream');
+  const url = GetChatBotSSEActionUrl('', 'chat/completion/stream');
   return axios.post<ChatCompletionReply>(url, request);
 }
