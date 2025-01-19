@@ -5,6 +5,17 @@ import { App } from '@/api/chat-bot/app';
 import { BAIDU_ERNIE_LITE_8K } from '@/config/llm';
 
 export interface ChatBotState {
+  // AI 处理状态
+  loading: boolean;
+  aiProcessing: boolean;
+  showHint: boolean;
+
+  refInput: any;
+  refFileInput: any;
+  refMessageContainer: any;
+
+  selectedImage: string;
+  controller: any;
   selectedApp: App;
   selectedLlm: string;
   currentConversation: Conversation;
@@ -12,6 +23,14 @@ export interface ChatBotState {
 
 const useChatBotStore = defineStore('chatBot', {
   state: (): ChatBotState => ({
+    loading: false,
+    aiProcessing: false,
+    showHint: false,
+    refInput: null,
+    refFileInput: null,
+    refMessageContainer: null,
+    selectedImage: '',
+    controller: null,
     selectedApp: {
       name: 'BrainX',
       description: '很乐意为您服务\n',

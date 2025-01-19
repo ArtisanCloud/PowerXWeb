@@ -1,0 +1,111 @@
+.container {
+  @input-container-height: 260px; /* 设置 inputContainer 的高度 */
+  //@input-container-height: 100%; /* 设置 inputContainer 的高度 */
+  @input: 140px;
+
+  //flex:1;
+  //border: #5d57c9 1px solid;
+  position: relative;
+  margin-top: auto; /* 将输入容器移动到容器的底部 */
+  width: 100%; /* 将宽度设置为100% */
+  align-self: flex-end; /* 将输入容器底部对齐 */
+  height: @input-container-height; /* 设置 inputContainer 的高度 */
+
+
+  border-top: @chat-bot-bg-soft 1px solid;
+  .imagePreview {
+    padding: 8px;
+    background-color: #f5f5f5;
+    border-radius: 4px;
+    margin-bottom: 8px;
+
+    .previewContent {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+
+      img {
+        border-radius: 4px;
+      }
+
+      button {
+        padding: 4px;
+        &:hover {
+          background-color: rgba(0, 0, 0, 0.05);
+        }
+      }
+    }
+  }
+
+  .inputTool {
+    border: #eee 1px solid;
+    border-radius: 6px;
+    margin: 0 4px;
+    height: 40px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    .left {
+      padding-left: 8px;
+      display: flex;
+      flex-direction: row;
+      gap: 4px;
+      justify-content: center;
+      align-items: center;
+    }
+    .buttonTool {
+      //margin: 6px;
+      background-color: white;
+      &:hover{
+        background-color: #f5f1f1;
+      }
+    }
+  }
+  .right {
+    padding-right: 8px;
+    display: flex;
+    flex-direction: row;
+    gap: 4px;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .inputMessage {
+    //border: #9d336c 1px solid;
+    padding: 10px;
+
+    .input {
+      padding: 6px;
+      border-radius: 4px;
+      font-size: 14px;
+      width: 100%;
+      height: @input;
+      /* 输入框样式 */
+    }
+
+    .error {
+      border: #ff006a 1px solid; // 错误时的边框颜色
+    }
+  }
+
+  .inputCommand {
+    display: flex;
+    flex-direction: row;
+    padding: 4px;
+    justify-content: flex-end;
+    align-items: center; /* 垂直居中 */
+    //border: #63de3a 1px solid;
+
+    .shortCut {
+      margin-right: 12px;
+      font-size: 12px;
+      padding: 4px;
+      //border: #5d57c9 1px solid;
+    }
+
+    .sendButton {
+      font-size: 12px;
+    }
+  }
+}
