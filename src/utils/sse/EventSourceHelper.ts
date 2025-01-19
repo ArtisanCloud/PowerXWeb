@@ -3,8 +3,7 @@ import {
   fetchEventSource,
   FetchEventSourceInit,
 } from '@microsoft/fetch-event-source';
-import Cookies from 'js-cookie';
-import { TOKEN_KEY } from '@/utils/auth';
+import { getToken } from '@/utils/auth';
 import FatalError from './FatalError';
 import RetriableError from './RetriableError';
 
@@ -32,8 +31,7 @@ const useSSE = () => {
   }
 
   function getSSEAccessToken() {
-    const token = Cookies.get(TOKEN_KEY);
-    return token;
+    return getToken();
   }
 
   function connectEventSource(options: EventSourceOptions) {

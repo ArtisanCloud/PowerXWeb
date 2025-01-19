@@ -5,13 +5,13 @@ export interface UserState {
   job?: string;
   organization?: string;
   location?: string;
+  mobile?: string;
   email?: string;
   introduction?: string;
   personalWebsite?: string;
   jobName?: string;
   organizationName?: string;
   locationName?: string;
-  phone?: string;
   registrationDate?: string;
   accountId?: string;
   certification?: number;

@@ -25,7 +25,7 @@
   const aiProcessing = ref(false);
   const showHint = ref(false);
 
-  let streamUrl = GetChatBotSSEActionUrl('agent/chat');
+  let streamUrl = GetChatBotSSEActionUrl('agent', 'chat');
   const sse = useSSE();
   let controller: any = null;
 
@@ -100,7 +100,7 @@
 
     // 如果是随意聊天模式
     if (!selectedApp.value?.uuid) {
-      streamUrl = GetChatBotSSEActionUrl('chat');
+      streamUrl = GetChatBotSSEActionUrl('', 'chat');
     }
 
     // 执行发送消息的操作
@@ -184,6 +184,7 @@
 
           if (parsedMsg.status === 'data') {
             objMsg = FormatSSEMessageReply(parsedMsg.content);
+            // console.log(objMsg);
           } else if (parsedMsg.status === 'error') {
             errorMessage = parsedMsg.message;
           } else if (parsedMsg.status === 'finished') {
@@ -193,11 +194,6 @@
 
           // const objMsg = JSON.parse(msg.data);
 
-          // <--- Add this check
-          // const lastItem =
-          //   chatBotStore.currentConversation.items[
-          //     chatBotStore.currentConversation.items.length - 1
-          //   ];
           chatBotStore.updateCurrentConversation({
             items: chatBotStore.currentConversation.items.map((item, index) =>
               index === chatBotStore.currentConversation.items.length - 1
@@ -213,6 +209,11 @@
           console.error('Error parsing JSON data:', error);
           handleChatClosed();
         } finally {
+          // <--- Add this check
+          // const lastItem =
+          //   chatBotStore.currentConversation.items[
+          //     chatBotStore.currentConversation.items.length - 1
+          //   ];
           // console.info("sse response", msg.data);")
         }
       },

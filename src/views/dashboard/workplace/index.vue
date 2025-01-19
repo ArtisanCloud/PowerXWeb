@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <div class="flex p-4 gap-2 h-full">
+    <div class="flex p-4 gap-4 h-full">
       <ChatBotView />
       <a-card class="custom-card">
         <div class="powerx-intro">

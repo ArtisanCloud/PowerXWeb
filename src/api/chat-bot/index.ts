@@ -1,4 +1,5 @@
 import { PowerModel, PrefixSSEUriWeb, PrefixUriWeb } from '@/api';
+import { buildUri, buildUrlWithParams } from '@/utils/url';
 
 export const UriWebChatBot = '/chat-bot';
 
@@ -45,14 +46,20 @@ export interface RequestSendChat {
   images?: string[];
   messages: Message[];
 }
-export const GetChatBotActionUrl = (action: string): string => {
-  // const channel = 'glm';
-  const channel = 'openai';
+export const GetChatBotActionUrl = (
+  channel: string,
+  action: string
+): string => {
   return `${PrefixUriWeb + UriWebChatBot}/${channel}/${action}`;
 };
 
-export const GetChatBotSSEActionUrl = (action: string): string => {
-  // const channel = 'glm';
-  const channel = 'openai';
-  return `${PrefixSSEUriWeb + UriWebChatBot}/${channel}/${action}`;
+export const GetChatBotSSEActionUrl = (
+  channel: string,
+  action: string
+): string => {
+  return buildUrlWithParams(import.meta.env.VITE_API_BASE_URL, [
+    PrefixSSEUriWeb + UriWebChatBot,
+    channel,
+    action,
+  ]);
 };

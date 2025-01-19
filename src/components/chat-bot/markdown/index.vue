@@ -1,5 +1,6 @@
 <script setup lang="ts">
   import MarkdownIt from 'markdown-it';
+  import { computed } from 'vue';
   import styles from './index.module.less';
 
   // 定义 props，接收外部传入的 markdown 内容
@@ -32,7 +33,7 @@ console.log(aJsVariable);
 `;
   // 使用 markdown-it 将 Markdown 转换为 HTML
   // const renderedMarkdown = md.render(markdownTextTest);
-  const renderedMarkdown = md.render(props.markdownText);
+  const renderedMarkdown = computed(() => md.render(props.markdownText));
 </script>
 
 <template>

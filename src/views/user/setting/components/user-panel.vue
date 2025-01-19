@@ -81,7 +81,7 @@
     },
     {
       label: 'userSetting.label.phone',
-      value: userStore.phone,
+      value: userStore.mobile,
     },
     {
       label: 'userSetting.label.registrationDate',

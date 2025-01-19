@@ -126,12 +126,14 @@
 </template>
 
 <script lang="ts" setup>
-  import { ref } from 'vue';
+  import { onMounted, ref } from 'vue';
   import { FormInstance } from '@arco-design/web-vue/es/form';
   import { BasicInfoModel } from '@/api/user-center';
+  import { useUserStore } from '@/store';
 
   const formRef = ref<FormInstance>();
   const formData = ref<BasicInfoModel>({
+    mobile: '',
     email: '',
     nickname: '',
     countryRegion: '',
@@ -139,6 +141,28 @@
     address: '',
     profile: '',
   });
+
+  // 获取用户信息并设置到表单
+  const userStore = useUserStore();
+  onMounted(async () => {
+    try {
+      await userStore.info(); // 从 Pinia Store 获取用户信息
+      // console.log('User data loaded', userStore.userInfo); // 打印出从store加载的用户信息（用于调试）
+
+      formData.value = {
+        mobile: userStore.mobile || '', // 使用 Pinia store 中的字段
+        email: userStore.email || '', // 使用 Pinia store 中的字段
+        nickname: userStore.name || '',
+        countryRegion: userStore.location || '',
+        area: '', // 根据你的需求来处理
+        address: userStore.organization || '',
+        profile: userStore.introduction || '',
+      };
+    } catch (error) {
+      console.error('Failed to load user info', error);
+    }
+  });
+
   const validate = async () => {
     const res = await formRef.value?.validate();
     if (!res) {
