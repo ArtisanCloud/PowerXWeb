@@ -3,6 +3,10 @@ export interface SSEMessage {
   content: string;
   error: string;
   message: string;
+  command?: {
+    type: string; // 指令类型，例如 "navigate", "updateUI"
+    payload?: Record<string, any>; // 指令相关的参数
+  };
 }
 
 export const FormatSSEMessageReply = (msg: string): string => {

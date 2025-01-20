@@ -80,7 +80,7 @@ export default function useChatBot() {
     chatBotStore.refFileInput.value?.click();
   };
 
-  const handleChatClosed = () => {
+  const handleChatClosed = (msg: SSEMessage | null) => {
     // console.log('chat closed');
     chatBotStore.loading = false;
     chatBotStore.showHint = false;
@@ -89,6 +89,12 @@ export default function useChatBot() {
     // // 清空 textarea
     // refInput.current!.value = '';
     chatBotStore.controller.abort();
+
+    // 执行命令
+    if (msg && msg.command) {
+      console.info(msg.command.type, msg.command.payload);
+      // Message.info(msg.command.type + msg.command.payload);
+    }
   };
 
   const actionSend = () => {
@@ -186,7 +192,7 @@ export default function useChatBot() {
           } else if (parsedMsg.status === 'error') {
             errorMessage = parsedMsg.message;
           } else if (parsedMsg.status === 'finished') {
-            handleChatClosed();
+            handleChatClosed(parsedMsg);
             return;
           }
 
@@ -205,7 +211,7 @@ export default function useChatBot() {
           });
         } catch (error) {
           console.error('Error parsing JSON data:', error);
-          handleChatClosed();
+          handleChatClosed(null);
         } finally {
           // <--- Add this check
           // const lastItem =
@@ -218,13 +224,13 @@ export default function useChatBot() {
       onclose() {
         // Handle connection closed
         // console.log('sse close');
-        handleChatClosed();
+        handleChatClosed(null);
       },
       onerror(err: any) {
         // Handle errors
         console.error('err', err);
         if (err) {
-          handleChatClosed();
+          handleChatClosed(null);
         }
       },
     });

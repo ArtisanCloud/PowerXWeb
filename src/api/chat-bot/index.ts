@@ -1,5 +1,5 @@
 import { PowerModel, PrefixSSEUriWeb, PrefixUriWeb } from '@/api';
-import { buildUri, buildUrlWithParams } from '@/utils/url';
+import { buildUrlWithParams } from '@/utils/url';
 
 export const UriWebChatBot = '/chat-bot';
 
